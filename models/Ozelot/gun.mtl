@@ -1,0 +1,57 @@
+newmtl Ozelot:DarkGreen
+illum 4
+Kd 0.26 0.21 0.18
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 2.00
+newmtl Ozelot:DarkerBlack
+illum 4
+Kd 0.09 0.09 0.09
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.55 0.55 0.55
+Ns 2.00
+newmtl Ozelot:Material__1
+illum 4
+Kd 0.60 0.29 0.05
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 2.00
+newmtl Ozelot:Material__2
+illum 4
+Kd 0.32 0.31 0.26
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.54 0.54 0.54
+Ns 2.00
+newmtl Ozelot:Material__4
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd oz.jpg
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 2.00
+newmtl Ozelot:Material__7
+illum 4
+Kd 0.16 0.18 0.15
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.54 0.54 0.54
+Ns 2.00
+newmtl Ozelot:Material__11
+illum 4
+Kd 0.74 0.74 0.74
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.60 0.60 0.60
+Ns 2.00
