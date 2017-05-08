@@ -10,6 +10,7 @@
 # include <gsim/gs_material.h>
 # include <gsim/gs_array.h>
 # include <gsim/gs_image.h>
+# include <vector>
 # include "ogl_tools.h"
 
 // Scene objects should be implemented in their own classes; and
@@ -27,7 +28,7 @@ class SoSuperquadric : public GlObjects
 
 	GLuint _texid, _texid2;
     int _numpoints;     // just saves the number of points
-   
+
    public :
     GsArray<GsVec> NL; // normal lines computed in last build
 
@@ -47,8 +48,61 @@ class SoSuperquadric : public GlObjects
    public :
     SoSuperquadric ();
     void init (int type);
-	void build( float len, float w, float h);
+	  void build( float len, float w, float h);
     void draw ( const GsMat& tr, const GsMat& pr, const GsLight& l );
  };
 
-#endif // SO_MODEL_H
+class zombie
+{
+public:
+
+  SoSuperquadric body;
+  SoSuperquadric head;
+  SoSuperquadric LeftArm;
+  SoSuperquadric RightArm;
+  SoSuperquadric LeftLeg;
+  SoSuperquadric RightLeg;
+
+  GsMat spawnLocation;
+
+  zombie() {
+
+    body.init(1);
+    head.init(2);
+    LeftArm.init(3);
+    RightArm.init(4);
+    LeftLeg.init(5);
+    RightLeg.init(6);
+
+    body.build(2, 1, 3);
+    head.build(2, 2, 2);
+    LeftArm.build(1, 1, 3);
+    RightArm.build(1, 1, 3);
+    LeftLeg.build(1, 1, 3);
+    RightLeg.build(1, 1, 3);
+
+  }
+  ~zombie() {
+
+  }
+
+}
+
+
+
+class targetList
+{
+public:
+
+  std::vector<zombie*> list;
+
+  zombie() {
+
+  }
+  ~zombie() {
+
+  }
+
+};
+
+#endif
