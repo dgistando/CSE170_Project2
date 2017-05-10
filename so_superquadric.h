@@ -1,4 +1,3 @@
-
 // Ensure the header file is included only once in multi-file projects
 #ifndef SO_QUAD_H
 #define SO_QUAD_H
@@ -63,7 +62,8 @@ public:
   SoSuperquadric LeftLeg;
   SoSuperquadric RightLeg;
 
-  GsMat spawnLocation;
+  GsMat currentLocation;
+  std::vector<GsMat> locations;
 
   zombie() {
 
@@ -74,34 +74,47 @@ public:
     LeftLeg.init(5);
     RightLeg.init(6);
 
-    body.build(2, 1, 3);
-    head.build(2, 2, 2);
-    LeftArm.build(1, 1, 3);
-    RightArm.build(1, 1, 3);
-    LeftLeg.build(1, 1, 3);
-    RightLeg.build(1, 1, 3);
+    //two spawn locations
+    int ran = rand()%2;
+    if(ran == 0) {
+      currentLocation =
+      (
+   	   1.0f, 0.0f, 0.0f, 5.0f,
+   	   0.0f, 1.0f, 0.0f, 0.0f,
+   	   0.0f, 0.0f, 1.0f, 5.0f,
+   	   0.0f, 0.0f, 0.0f, 1.0f
+      );
+    } else {
+      currentLocation =
+      (
+   	   1.0f, 0.0f, 0.0f, -5.0f,
+   	   0.0f, 1.0f, 0.0f, 0.0f,
+   	   0.0f, 0.0f, 1.0f, -5.0f,
+   	   0.0f, 0.0f, 0.0f, 1.0f
+      );
+    }
 
+    float scale = 0.01;
+
+    body.build(2 * scale, 1* scale, 3* scale);
+    head.build(2* scale, 2* scale, 2* scale);
+    LeftArm.build(1* scale, 1* scale, 3* scale);
+    RightArm.build(1* scale, 1* scale, 3* scale);
+    LeftLeg.build(1* scale, 1* scale, 3* scale);
+    RightLeg.build(1* scale, 1* scale, 3* scale);
   }
-  ~zombie() {
 
+  void drawZombie(const GsMat& stransf, const GsMat& sproj, const GsLight& _light) {
+	  body.draw(stransf*currentLocation, sproj, _light);
+	  head.draw(stransf*currentLocation, sproj, _light);
+	  LeftArm.draw(stransf*currentLocation, sproj, _light);
+	  RightArm.draw(stransf*currentLocation, sproj, _light);
+	  LeftLeg.draw(stransf*currentLocation, sproj, _light);
+	  RightLeg.draw(stransf*currentLocation, sproj, _light);
   }
 
-}
+  ~zombie() {}
 
-
-
-class targetList
-{
-public:
-
-  std::vector<zombie*> list;
-
-  zombie() {
-
-  }
-  ~zombie() {
-
-  }
 
 };
 
