@@ -11,6 +11,7 @@
 # include <gsim/gs_image.h>
 # include <vector>
 # include "ogl_tools.h"
+# include "math.h"
 
 // Scene objects should be implemented in their own classes; and
 // here is an example of how to organize a scene object in a class.
@@ -65,6 +66,14 @@ public:
   GsMat currentLocation;
   std::vector<GsMat> locations;
 
+  float AT = 0.5f;
+  GsMat ArmOuts( //rotations of the right arm
+    1.0f, 0.0f, 0.0f, 0.0f,
+    0.0f, cos(AT), -sin(AT), 0.0f,
+    0.0f, sin(AT), cos(AT), 0.0f,
+    0.0f, 0.0f, 0.0f, 1.0f
+  );
+
   zombie() {
 
     body.init(1);
@@ -107,11 +116,12 @@ public:
   void drawZombie(const GsMat& stransf, const GsMat& sproj, const GsLight& _light) {
 	  body.draw(stransf*currentLocation, sproj, _light);
 	  head.draw(stransf*currentLocation, sproj, _light);
-	  LeftArm.draw(stransf*currentLocation, sproj, _light);
-	  RightArm.draw(stransf*currentLocation, sproj, _light);
+	  LeftArm.draw(stransf*currentLocation*ArmOuts, sproj, _light);
+	  RightArm.draw(stransf*currentLocation*ArmOuts, sproj, _light);
 	  LeftLeg.draw(stransf*currentLocation, sproj, _light);
 	  RightLeg.draw(stransf*currentLocation, sproj, _light);
   }
+
 /*
   int factorial(int i) {
   	if (i == 1 || i == 0) return 1;
