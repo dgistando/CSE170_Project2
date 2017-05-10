@@ -96,7 +96,7 @@ public:
 
     float scale = 0.01;
 
-    body.build(2 * scale, 1* scale, 3* scale);
+    body.build(2* scale, 1* scale, 3* scale);
     head.build(2* scale, 2* scale, 2* scale);
     LeftArm.build(1* scale, 1* scale, 3* scale);
     RightArm.build(1* scale, 1* scale, 3* scale);
@@ -112,7 +112,47 @@ public:
 	  LeftLeg.draw(stransf*currentLocation, sproj, _light);
 	  RightLeg.draw(stransf*currentLocation, sproj, _light);
   }
+/*
+  int factorial(int i) {
+  	if (i == 1 || i == 0) return 1;
+  	return (i + factorial(i - 1));
+  }
 
+  float binomialCoefficient( float n, float i) {
+  	return ( factorial(n) / ( factorial(i) * factorial(n - i) ));
+  }
+
+  GsVec eval_bezier(float t, const GsArray<GsVec>& points) {
+
+  	GsVec location;
+  	location.x = 0;
+  	location.z = 0;
+  	int N = points.size();
+
+  	for (int i = 0; i < N; i++) {
+
+  		location.x = location.x + (binomialCoefficient((float)(N - 1), (float)i) * pow(t, (double)i) * pow((1 - t), (N - 1 - i)) * points[i].x);
+  		location.z = location.z + (binomialCoefficient((float)(N - 1), (float)i) * pow(t, (double)i) * pow((1 - t), (N - 1 - i)) * points[i].z);
+
+  	}
+
+  	return location;
+  }
+
+  void pathing(GsMat TankLocation) {
+
+    bezier.V.capacity(0);
+    const GsArray<GsVec>& V = _poly.vertexarray();
+    int c = 0;
+    for (float i = 0; i <= t; i++) {
+
+      GsVec P = eval_bezier((float)(i / t), V);
+      bezier.add(P, c);
+      c++;
+    }
+
+  }
+*/
   ~zombie() {}
 
 
