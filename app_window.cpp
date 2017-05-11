@@ -52,6 +52,17 @@ AppWindow::AppWindow ( const char* label, int x, int y, int w, int h )
    Z = 0.0f;
    //////////////////////////////////////////
 
+   //AREYESCHANGESHIT
+   startTime = gs_time();
+   velocity = 0.5;
+   accelX = 0.00;
+   gravity = -0.25;
+   initTime = 0.00;
+   currTime = 0.00;
+   timeDiff = 0.00;
+   fireBool = FALSE;
+   deltaY = 0.00;
+   deltaZ = 0.00;
  }
 
 void AppWindow::initPrograms ()
@@ -79,6 +90,8 @@ void AppWindow::initPrograms ()
 
    crate.init("../textures/crate_1.png",2);
 
+   missle.init("../textures/crate_1.png", 2);
+
    // set light:
    //_light.set ( GsVec(0,0,10), GsColor(90,90,90,255), GsColor::white, GsColor::white );
    _light.set ( GsVec(0,1,1), GsColor::gray, GsColor::gray, GsColor::gray );
@@ -99,6 +112,8 @@ void AppWindow::initPrograms ()
    wheels6.load("../models/Ozelot/wheels6.obj");
 
    crate.load("../models/Crate1.obj");
+
+   missle.load("../models/missle.obj");
 
    ground.build(1);
    sky.build(0);
@@ -223,6 +238,23 @@ void AppWindow::glutKeyboard ( unsigned char key, int x, int y )
 	  case 'z': Z -= 0.01f; std::cout <<"z-: "<<Z << std::endl; break;
 	  case 'Z': Z += 0.01f; std::cout <<"Z+: "<<Z << std::endl; break;
 	  
+		  // AREYESEDITSHIT
+		  // new app window controls
+	  case '9': if (fireBool == FALSE)
+	  {
+		  fireBool = 1; initTime = gs_time(); std::cout << "!!! ~~~ A BUTTON WAS PRESSED ~~~ !!!" << std::endl;  break;
+	  }
+	  case '0': std::cout << "timeDiff since start up:\t" << timeDiff << " | fire:\t" << fireBool
+		  << " | deltaY , deltaZ:\t" << deltaY << " , " << deltaZ << " | gunMovsin:\t" << sin(gunMovx) << std::endl;  break;
+
+	  case '1': velocity -= .04; std::cout << "velocity:\t" << velocity << std::endl;  break;
+	  case '2': velocity += .04; std::cout << "velocity:\t" << velocity << std::endl;  break;
+	  case '3': accelX -= .04; std::cout << "accelX:\t" << accelX << std::endl;  break;
+	  case '4': accelX += .04; std::cout << "accelX:\t" << accelX << std::endl;  break;
+	  case '5': gravity -= .04; std::cout << "gravity:\t" << gravity << std::endl;  break;
+	  case '6': gravity += .04; std::cout << "gravity:\t" << gravity << std::endl;  break;
+
+
       default : 
                 break;
 	}
@@ -313,8 +345,15 @@ void AppWindow::glutPassiveMouse(int x, int y)
 
 void AppWindow::glutIdle()
 {
+	if (fireBool == TRUE)
+		redraw();
 
-	std::cout << "THIS IS THE IDLE FUNCTION" << std::endl;
+	if ((deltaY < -1.00) && (timeDiff < 1000))
+	{
+		fireBool = 0;
+		std::cout << "FIRE BOOL CHANGED TO 0!" << std::endl;
+		redraw();
+	}
 
 }
 
@@ -420,7 +459,7 @@ void AppWindow::glutDisplay()
    // Draw:
    if ( _viewaxis ) _axis.draw (stransf, sproj);
    
-   GsMat bodyTrans, bodyRot;
+   GsMat bodyTrans, bodyRot, missleTrans, missleScale, missleFireTrans, missleMat;
 
    bodyRot.roty(Ttheta);
    bodyTrans.translation(bodyMovx, bodyMovy, bodyMovz);//back
@@ -457,6 +496,31 @@ void AppWindow::glutDisplay()
    gun.draw(stransf*bodyTrans*bodyRot*translationsBack*firstRot*rotations2*rotations*translations, sproj, _light);
 
    gun.drawShad(stransf*shadProj*bodyTrans*bodyRot*translationsBack*rotations2*rotations*translations, sproj, _light);
+
+   // AREYESEDITSHIT
+   //DRAW MISSLE IN THE SAME PLACE AS THE GUN plus some trans mat to factor in diff in center of model
+   missleTrans.translation(-0.2f, 1.0f, -1.15f);
+   missleScale.scale(0.5f);
+
+   if (fireBool == TRUE)
+   {
+	   currTime = gs_time();
+	   timeDiff = currTime - initTime;
+
+	   deltaZ = (velocity*cos(-gunMovx)*timeDiff) + (.5 *accelX*(pow(timeDiff, 2)));
+	   deltaY = (velocity*sin(-gunMovx)*timeDiff) + (.5 *gravity*(pow(timeDiff, 2)));
+	   missleFireTrans.translation(0.0f, float(deltaY), float(deltaZ));
+
+	   missle.draw(stransf*bodyTrans*bodyRot*translationsBack*rotations2*rotations*translations*missleFireTrans*missleTrans*missleScale, sproj, _light);
+
+   }
+   else
+   {
+	   missleMat = bodyTrans*bodyRot*translationsBack*rotations2*rotations*translations*missleTrans*missleScale;
+	   missle.draw(stransf*bodyTrans*bodyRot*translationsBack*rotations2*rotations*translations*missleTrans*missleScale, sproj, _light);
+	   deltaY = 0.00;
+	   deltaZ = 0.00;
+   }
 
    //GUN BASE ROTATION
    translations.translation(-0.02f, -0.76f, 0.6f);//left Antenna to center
