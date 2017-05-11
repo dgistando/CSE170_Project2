@@ -1,25 +1,53 @@
 ﻿  app_main.cpp
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(70): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(85): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(148): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(148): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(160): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(161): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(181): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(182): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(184): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(76): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(77): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(124): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(246): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(252): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(259): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(265): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(274): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(280): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(287): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(293): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(344): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(344): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(356): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(357): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(410): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(411): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(412): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(413): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(415): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(418): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   app_window.cpp
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(70): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(85): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(148): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(148): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(160): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(161): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(181): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(182): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(184): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\app_window.cpp(388): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\app_window.cpp(389): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\app_window.cpp(492): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(76): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(77): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(124): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(246): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(252): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(259): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(265): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(274): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(280): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(287): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(293): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(344): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(344): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(356): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(357): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(410): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(411): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(412): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(413): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(415): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(418): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\app_window.cpp(356): warning C4018: '<': signed/unsigned mismatch
+c:\users\dgist\documents\github\cse170_project2\app_window.cpp(403): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\app_window.cpp(404): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\app_window.cpp(507): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\app_window.cpp(636): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
+  LINK : obj\objloader_Debug\objloader.exe not found or not built by the last incremental link; performing full link
+app_main.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
   glutapp3d.vcxproj -> C:\Users\dgist\Documents\GitHub\CSE170_Project2\visualc14\obj\objloader_Debug\objloader.exe

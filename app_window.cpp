@@ -122,8 +122,9 @@ void AppWindow::initPrograms ()
 
    /////////////////////////////
  //  zombieList = std::vector<zombie*>();
-
-   zombieList.push_back(new zombie());
+   for (int i = 0; i < 5;i++) {
+	   zombieList.push_back(new zombie());
+   }
 
    redraw();
  }
@@ -280,6 +281,8 @@ void AppWindow::glutSpecial ( int key, int x, int y )
 		case GLUT_KEY_UP:
 			bodyMovz += cos(Ttheta)*0.08f;
 			bodyMovx += sin(Ttheta)*0.08f;
+			
+			movement = true;
 
 		   wheelMov += 0.1f;
 		   turn = false;
@@ -288,6 +291,8 @@ void AppWindow::glutSpecial ( int key, int x, int y )
 
 		   bodyMovz -= cos(Ttheta)*0.08f;
 		   bodyMovx -= sin(Ttheta)*0.08f;
+
+		   movement = true;
 
 		   wheelMov -= 0.1f;
 		   turn = false;
@@ -346,6 +351,14 @@ void AppWindow::glutPassiveMouse(int x, int y)
 
 void AppWindow::glutIdle()
 {
+
+	////////////////////////////////////////
+	for (int i = 0; i < zombieList.size(); i++) {
+		zombieList[i]->updateLocation(zombieList[i]->currentStep);
+		zombieList[i]->updateArms();
+		zombieList[i]->updateLegs();
+	}
+
 	if (fireBool == TRUE)
 		redraw();
 
@@ -356,6 +369,8 @@ void AppWindow::glutIdle()
 		redraw();
 	}
 
+
+	redraw();
 }
 
 void AppWindow::glutMenu ( int m )
@@ -491,6 +506,7 @@ void AppWindow::glutDisplay()
    GsMat firstRot;
    firstRot.roty(-(_roty + GS_PI) - Ttheta);
 
+
    rotations.rotx(gunMovx);
    rotations2.roty(gunMovy);
    translationsBack.translation(0.02f, 0.88f, -0.58f);
@@ -609,8 +625,22 @@ void AppWindow::glutDisplay()
    crate.draw(stransf*Scale*translations, sproj, _light);
 
    //////////////////////////////////////////////////////////////////////
-   zombieList[0]->drawZombie(stransf, sproj, _light);
+   //zombieList[0]->drawZombie(stransf, sproj, _light);
+   if (movement) {
+	   for (auto zombie : zombieList) {
+		   zombie->updateVectorLocations(zombie->TankCurrentLocation);
+	   }
+	   movement = false;
+   }
 
+	for (int i = 0; i < zombieList.size();i++) {
+			if (zombieList[i]->changed == 1) {
+				zombieList[i]->pathing(bodyTrans);
+			}
+		zombieList[i]->TankCurrentLocation = bodyTrans;
+		zombieList[i]->drawZombie(stransf, sproj, _light);
+	  
+	}
 
    // Swap buffers and draw:
    glFlush();         // flush the pipeline (usually not necessary)

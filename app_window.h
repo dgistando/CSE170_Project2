@@ -23,6 +23,7 @@ class AppWindow : public GlutWindow
 	 ///////////////////////////////////////////
 
 	 std::vector<zombie*> zombieList;
+	 bool movement = false;
 	 /////////////////////////////////////////////
 
 	 time_t timer;
@@ -76,7 +77,7 @@ class AppWindow : public GlutWindow
     virtual void glutMotion ( int x, int y );
     virtual void glutDisplay ();
     virtual void glutReshape ( int w, int h );
-	//dgistandoo
+	//dgistando
 	virtual void glutIdle();
 	virtual void glutPassiveMouse(int x, int y);
  };
