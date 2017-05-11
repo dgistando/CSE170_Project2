@@ -31,6 +31,8 @@ class AppWindow : public GlutWindow
 	 bool fireBool;
 	 double startTime, initTime, currTime, timeDiff,
 		 deltaZ, deltaY, theta, velocity, gravity, accelX;
+	 GsMat bodyTransOLD, bodyRotOLD, translationsBackOLD, firstRotOLD, rotations2OLD, rotationsOLD, translationsOLD;
+	 float gunMovxOLD;
 	 /////////////////////////////////////////////
 
     // My scene objects:
@@ -39,6 +41,7 @@ class AppWindow : public GlutWindow
 					body,caps,
 					gun,gun_base,left_antenna,
 					right_antenna,wheels1,wheels2,wheels3,wheels4, wheels5,wheels6, crate, missle;
+
 
 	SoTexturedTube ground, sky;
 

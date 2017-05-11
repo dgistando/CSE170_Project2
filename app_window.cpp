@@ -60,9 +60,10 @@ AppWindow::AppWindow ( const char* label, int x, int y, int w, int h )
    initTime = 0.00;
    currTime = 0.00;
    timeDiff = 0.00;
-   fireBool = FALSE;
+   fireBool = false;
    deltaY = 0.00;
    deltaZ = 0.00;
+   gunMovxOLD = 0.0f;
  }
 
 void AppWindow::initPrograms ()
@@ -507,17 +508,25 @@ void AppWindow::glutDisplay()
 	   currTime = gs_time();
 	   timeDiff = currTime - initTime;
 
-	   deltaZ = (velocity*cos(-gunMovx)*timeDiff) + (.5 *accelX*(pow(timeDiff, 2)));
-	   deltaY = (velocity*sin(-gunMovx)*timeDiff) + (.5 *gravity*(pow(timeDiff, 2)));
+	   deltaZ = (velocity*cos(-gunMovxOLD)*timeDiff) + (.5 *accelX*(pow(timeDiff, 2)));
+	   deltaY = (velocity*sin(-gunMovxOLD)*timeDiff) + (.5 *gravity*(pow(timeDiff, 2)));
 	   missleFireTrans.translation(0.0f, float(deltaY), float(deltaZ));
 
-	   missle.draw(stransf*bodyTrans*bodyRot*translationsBack*rotations2*rotations*translations*missleFireTrans*missleTrans*missleScale, sproj, _light);
-
+	   missle.draw(stransf*bodyTransOLD*bodyRotOLD*translationsBackOLD*firstRotOLD*rotations2OLD*rotationsOLD*translationsOLD*missleFireTrans*missleTrans*missleScale, sproj, _light);
    }
    else
    {
-	   missleMat = bodyTrans*bodyRot*translationsBack*rotations2*rotations*translations*missleTrans*missleScale;
-	   missle.draw(stransf*bodyTrans*bodyRot*translationsBack*rotations2*rotations*translations*missleTrans*missleScale, sproj, _light);
+	   gunMovxOLD = gunMovx;
+	   bodyTransOLD = bodyTrans;
+	   bodyRotOLD = bodyRot;
+	   translationsBackOLD = translationsBack;
+	   firstRotOLD = firstRot;
+	   rotations2OLD = rotations2;
+	   rotationsOLD = rotations;
+	   translationsOLD = translations;
+
+	   missleMat = bodyTrans*bodyRot*translationsBack*firstRot*rotations2*rotations*translations;
+	   missle.draw(stransf*bodyTrans*bodyRot*translationsBack*firstRot*rotations2*rotations*translations*missleTrans*missleScale, sproj, _light);
 	   deltaY = 0.00;
 	   deltaZ = 0.00;
    }
