@@ -66,6 +66,7 @@ class AppWindow : public GlutWindow
     virtual void glutDisplay ();
     virtual void glutReshape ( int w, int h );
 	//dgistandoo
+	virtual void glutIdle();
 	virtual void glutPassiveMouse(int x, int y);
  };
 

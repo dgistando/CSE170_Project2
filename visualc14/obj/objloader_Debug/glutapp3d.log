@@ -1,4 +1,4 @@
-﻿  app_main.cpp
+﻿  app_window.cpp
 c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(70): warning C4305: 'initializing': truncation from 'double' to 'float'
 c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(85): warning C4305: 'initializing': truncation from 'double' to 'float'
 c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(148): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
@@ -8,35 +8,8 @@ c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(161): warning 
 c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(181): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(182): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(184): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  app_window.cpp
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(70): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(85): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(148): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(148): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(160): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(161): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(181): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(182): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(184): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  so_superquadric.cpp
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(70): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(85): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(148): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(148): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(160): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(161): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(181): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(182): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.h(184): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.cpp(36): warning C4101: 'id': unreferenced local variable
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.cpp(52): warning C4101: 'id': unreferenced local variable
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.cpp(68): warning C4101: 'id': unreferenced local variable
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.cpp(84): warning C4101: 'id': unreferenced local variable
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.cpp(100): warning C4101: 'id': unreferenced local variable
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.cpp(116): warning C4101: 'id': unreferenced local variable
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.cpp(236): warning C4101: 'c1': unreferenced local variable
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.cpp(236): warning C4101: 'c3': unreferenced local variable
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.cpp(236): warning C4101: 'c2': unreferenced local variable
-c:\users\dgist\documents\github\cse170_project2\so_superquadric.cpp(236): warning C4101: 'c4': unreferenced local variable
-  Generating Code...
+c:\users\dgist\documents\github\cse170_project2\app_window.cpp(348): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\app_window.cpp(349): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\dgist\documents\github\cse170_project2\app_window.cpp(452): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+app_main.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
   glutapp3d.vcxproj -> C:\Users\dgist\Documents\GitHub\CSE170_Project2\visualc14\obj\objloader_Debug\objloader.exe

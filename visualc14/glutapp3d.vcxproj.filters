@@ -67,6 +67,9 @@
     <ClCompile Include="..\so_superquadric.cpp">
       <Filter>myapp</Filter>
     </ClCompile>
+    <ClCompile Include="..\so_stats.cpp">
+      <Filter>myapp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\gsim\gs.h">
@@ -145,6 +148,9 @@
       <Filter>myapp</Filter>
     </ClInclude>
     <ClInclude Include="..\so_superquadric.h">
+      <Filter>myapp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\so_stats.h">
       <Filter>myapp</Filter>
     </ClInclude>
   </ItemGroup>

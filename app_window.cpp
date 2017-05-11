@@ -12,7 +12,8 @@ AppWindow::AppWindow ( const char* label, int x, int y, int w, int h )
    _viewaxis = true;
    camview__ = false;
    _fovy = GS_TORAD(60.0f);
-   _rotx = _roty = 0;
+   _rotx = 0;
+   _roty = 0;
    _w = w;
    _h = h;
    offset = 0.2f;
@@ -244,16 +245,16 @@ void AppWindow::glutSpecial ( int key, int x, int y )
 		case GLUT_KEY_LEFT: Ttheta += ((float)(GS_PI / 2)/12);   direction++; turn = true;  break;
 		case GLUT_KEY_RIGHT:  Ttheta -= ((float)(GS_PI / 2)/12);  direction+=3; turn = true; break;
 		case GLUT_KEY_UP:
-			bodyMovz += cos(Ttheta)*0.05f;
-			bodyMovx += sin(Ttheta)*0.05f;
+			bodyMovz += cos(Ttheta)*0.08f;
+			bodyMovx += sin(Ttheta)*0.08f;
 
 		   wheelMov += 0.1f;
 		   turn = false;
 		   break;
 	   case GLUT_KEY_DOWN: 
 
-		   bodyMovz -= cos(Ttheta)*0.05f;
-		   bodyMovx -= sin(Ttheta)*0.05f;
+		   bodyMovz -= cos(Ttheta)*0.08f;
+		   bodyMovx -= sin(Ttheta)*0.08f;
 
 		   wheelMov -= 0.1f;
 		   turn = false;
@@ -295,21 +296,27 @@ void AppWindow::glutMotion ( int x, int y )
 
 void AppWindow::glutPassiveMouse(int x, int y)
 {
-	std::cout << "glut PASSIVE Motion x: " << x <<"window size: w"<< _w << std::endl;
-	std::cout << "glut PASSIVE Motion y: " << y << std::endl;
+	//std::cout << "glut PASSIVE Motion x: " << x <<"window size: w"<< _w << std::endl;
+	//std::cout << "glut PASSIVE Motion y: " << y << std::endl;
 
 	//get distance from the center
 	int distanceFromCenter = abs(x - (_w / 2));
 
 	//the further you are from the center the faster the faster you turn
 	if (distanceFromCenter > (_w / 30)) {
-		_roty = (x > (_w / 2)) ? _roty + (float)(distanceFromCenter / (_w*4.5f)) : _roty - (float)(distanceFromCenter / (_w*4.5f));
+		_roty = (x > (_w / 2)) ? _roty + (float)(distanceFromCenter / (_w*4.7f)) : _roty - (float)(distanceFromCenter / (_w*4.7f));
 	}
 
 	lookUp = -((float)(y / (_h*1.0f))) + 1.5f;
 	redraw();
 }
 
+void AppWindow::glutIdle()
+{
+
+	std::cout << "THIS IS THE IDLE FUNCTION" << std::endl;
+
+}
 
 void AppWindow::glutMenu ( int m )
  {
@@ -338,8 +345,8 @@ void AppWindow::glutDisplay()
 	// Define our scene transformation:
 	GsMat rx, ry, stransf;
 	GsMat camTrans, camTransback;
-	camTrans.translation(bodyMovx, bodyMovy, bodyMovz);
-	camTransback.translation(-bodyMovx, -bodyMovy,-bodyMovz);
+	camTrans.translation(bodyMovx, bodyMovy, (bodyMovz-0.5));
+	camTransback.translation(-bodyMovx, -bodyMovy,-(bodyMovz-0.5));
 	rx.rotx(_rotx);
 	ry.roty(_roty);
 	stransf = rx*camTrans*ry*camTransback; // set the scene transformation matrix
@@ -384,7 +391,7 @@ void AppWindow::glutDisplay()
 	else
 	{
 		GsVec 
-			eye(bodyMovx+0.5f ,2 ,bodyMovz-1),
+			eye(bodyMovx+0.1f ,1.4f ,bodyMovz-1),
 			center(bodyMovx, lookUp+0.5f , bodyMovz),
 			up(0, 1, 0);
 		camview.lookat(eye, center, up); // set our 4x4 "camera" matrix
@@ -441,10 +448,13 @@ void AppWindow::glutDisplay()
 
    //GUN ROTATION
    translations.translation(-0.02f, -0.88f, 0.58f);//gun to center
+   GsMat firstRot;
+   firstRot.roty(-(_roty + GS_PI) - Ttheta);
+
    rotations.rotx(gunMovx);
    rotations2.roty(gunMovy);
    translationsBack.translation(0.02f, 0.88f, -0.58f);
-   gun.draw(stransf*bodyTrans*bodyRot*translationsBack*rotations2*rotations*translations, sproj, _light);
+   gun.draw(stransf*bodyTrans*bodyRot*translationsBack*firstRot*rotations2*rotations*translations, sproj, _light);
 
    gun.drawShad(stransf*shadProj*bodyTrans*bodyRot*translationsBack*rotations2*rotations*translations, sproj, _light);
 
