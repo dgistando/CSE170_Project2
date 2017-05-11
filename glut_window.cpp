@@ -48,6 +48,7 @@ GlutWindow::GlutWindow ( const char* label, int x, int y, int w, int h )
    ::glutSpecialFunc ( glutSpecialCB );
    ::glutMouseFunc ( glutMouseCB );
    ::glutMotionFunc ( glutMotionCB );
+   ::glutPassiveMotionFunc(glutPassiveMouseCB);
 
    // Set up idle callback for background processing if needed:
    ::glutIdleFunc ( glutIdleCB );
@@ -104,4 +105,9 @@ void GlutWindow::glutDisplayCB ()
  {
    Singleton->glutDisplay ();
  }
+
+void GlutWindow::glutPassiveMouseCB(int x, int y) 
+{
+	Singleton->glutPassiveMouse(x, y);
+}
 

@@ -28,6 +28,7 @@ AppWindow::AppWindow ( const char* label, int x, int y, int w, int h )
 	autoGunMovx = 0.0f;
 	autoGunMovy = 0.0f;
 	skyMov = 0.0f;
+	lookUp = 0.0f;
 
 	antennaMov = 0.0f;
 	bodyMovx = 0.0f;
@@ -35,6 +36,7 @@ AppWindow::AppWindow ( const char* label, int x, int y, int w, int h )
 	bodyMovz = 0.0f;
 	Bodyturn = 0.0f;
 
+	Ttheta = 0.0f;
 	direction = 0;
 
    IDground = 45;
@@ -48,17 +50,7 @@ AppWindow::AppWindow ( const char* label, int x, int y, int w, int h )
    Y = 0.0f;
    Z = 0.0f;
    //////////////////////////////////////////
-   moveX = 0.0;
-   moveZ = 0.0;
-   camChange = true;
-   BT = 0.0f;
-   HT = 0.0f;
-   RAT = 0.0f;
-   LAT = 0.0f;
-   RLT = 0.0f;
-   LLT = 0.0f;
 
-   scale = -1.0f;
  }
 
 void AppWindow::initPrograms ()
@@ -112,21 +104,9 @@ void AppWindow::initPrograms ()
 
 
    /////////////////////////////
-   humanBody.init(1); //body
-   head.init(2);	//head
-   RtArm.init(3);	//right arm
-   LfArm.init(4);	//left arm
-   RtLeg.init(5);	//right leg
-   LfLeg.init(6);	//left leg
+ //  zombieList = std::vector<zombie*>();
 
-   humanBody.build(2 * scale, scale, 3 * scale);
-   head.build(2 * scale, 2 * scale, 2 * scale);
-   RtArm.build(scale, scale, 3 * scale);
-   LfArm.build(scale, scale, 3 * scale);
-   RtLeg.build(scale, scale, 3 * scale);
-   LfLeg.build(scale, scale, 3 * scale);
-
-
+   zombieList.push_back(new zombie());
 
    redraw();
  }
@@ -194,6 +174,7 @@ GsVec2 AppWindow::windowToScene ( const GsVec2& v )
                     1.0f - (2.0f*(v.y/float(_h))) );
  }
 
+
 // Called every time there is a window event
 void AppWindow::glutKeyboard ( unsigned char key, int x, int y )
  {
@@ -202,7 +183,13 @@ void AppWindow::glutKeyboard ( unsigned char key, int x, int y )
    switch ( key )
     { 
      case 'b': _viewaxis = !_viewaxis;redraw(); break;
-	  case ' ': camview__ = !camview__; camsh = 0.0f; camnod = 0.0f; rd = false; break;
+	  case ' ': camview__ = !camview__; 
+		  camsh = 0.0f;
+		  camnod = 0.0f;
+		  rd = false;
+		  _rotx = 0.0f;
+		  _roty = 0.0f;
+		  break;
 	  case 27 : exit(1); // Esc was pressed
 
 	  case 'i':offset += 0.04f; break;
@@ -248,36 +235,26 @@ void AppWindow::glutSpecial ( int key, int x, int y )
    const float incf=0.05f;
 
    if (camview__) {
-	   _rotx = 0.0f;
-	   _roty = 0.0f;
+	
 
 	   switch (key)
 	   {
-	   case GLUT_KEY_LEFT: Bodyturn += (float)(GS_PI / 2);   direction++; turn = true;  break;
-	   case GLUT_KEY_RIGHT:  Bodyturn += (float)(3*GS_PI / 2);  direction+=3; turn = true; break;
-	   case GLUT_KEY_UP:
+		   //case GLUT_KEY_LEFT: Bodyturn += (float)(GS_PI / 2);   direction++; turn = true;  break;
+		   //case GLUT_KEY_RIGHT:  Bodyturn += (float)(3*GS_PI / 2);  direction+=3; turn = true; break;
+		case GLUT_KEY_LEFT: Ttheta += ((float)(GS_PI / 2)/12);   direction++; turn = true;  break;
+		case GLUT_KEY_RIGHT:  Ttheta -= ((float)(GS_PI / 2)/12);  direction+=3; turn = true; break;
+		case GLUT_KEY_UP:
+			bodyMovz += cos(Ttheta)*0.05f;
+			bodyMovx += sin(Ttheta)*0.05f;
 
-		   switch (abs(direction))
-		   {
-		   case 0:bodyMovx += 0.0f; bodyMovy += 0.0f; bodyMovz += 0.2f; break;
-		   case 1:bodyMovx += 0.2f; bodyMovy += 0.0f; bodyMovz += 0.0f; break;
-		   case 2:bodyMovx += 0.0f; bodyMovy += 0.0f; bodyMovz -= 0.2f; break;
-		   case 3:bodyMovx -= 0.2f; bodyMovy += 0.0f; bodyMovz += 0.0f; break;
-		   default:break;
-		   }
 		   wheelMov += 0.1f;
 		   turn = false;
 		   break;
 	   case GLUT_KEY_DOWN: 
 
-		   switch (abs(direction))
-		   {
-		   case 0:bodyMovx -= 0.0f; bodyMovy -= 0.0f; bodyMovz -= 0.2f; break;
-		   case 1:bodyMovx -= 0.2f; bodyMovy -= 0.0f; bodyMovz -= 0.0f; break;
-		   case 2:bodyMovx -= 0.0f; bodyMovy -= 0.0f; bodyMovz += 0.2f; break;
-		   case 3:bodyMovx += 0.2f; bodyMovy -= 0.0f; bodyMovz -= 0.0f; break;
-		   default:break;
-		   }
+		   bodyMovz -= cos(Ttheta)*0.05f;
+		   bodyMovx -= sin(Ttheta)*0.05f;
+
 		   wheelMov -= 0.1f;
 		   turn = false;
 		   break;
@@ -316,6 +293,24 @@ void AppWindow::glutMotion ( int x, int y )
  {
  }
 
+void AppWindow::glutPassiveMouse(int x, int y)
+{
+	std::cout << "glut PASSIVE Motion x: " << x <<"window size: w"<< _w << std::endl;
+	std::cout << "glut PASSIVE Motion y: " << y << std::endl;
+
+	//get distance from the center
+	int distanceFromCenter = abs(x - (_w / 2));
+
+	//the further you are from the center the faster the faster you turn
+	if (distanceFromCenter > (_w / 30)) {
+		_roty = (x > (_w / 2)) ? _roty + (float)(distanceFromCenter / (_w*4.5f)) : _roty - (float)(distanceFromCenter / (_w*4.5f));
+	}
+
+	lookUp = -((float)(y / (_h*1.0f))) + 1.5f;
+	redraw();
+}
+
+
 void AppWindow::glutMenu ( int m )
  {
    std::cout<<"Menu Event: "<<m<<std::endl;
@@ -342,9 +337,12 @@ void AppWindow::glutDisplay()
 
 	// Define our scene transformation:
 	GsMat rx, ry, stransf;
+	GsMat camTrans, camTransback;
+	camTrans.translation(bodyMovx, bodyMovy, bodyMovz);
+	camTransback.translation(-bodyMovx, -bodyMovy,-bodyMovz);
 	rx.rotx(_rotx);
 	ry.roty(_roty);
-	stransf = rx*ry; // set the scene transformation matrix
+	stransf = rx*camTrans*ry*camTransback; // set the scene transformation matrix
 
 	// Define our projection transformation:
 	// (see demo program in gltutors-projection.7z, we are replicating the same behavior here)
@@ -385,7 +383,10 @@ void AppWindow::glutDisplay()
 	}
 	else
 	{
-		GsVec eye(0, 2, 3), center(bodyMovx, 0 , bodyMovz), up(0, 1, 0);
+		GsVec 
+			eye(bodyMovx+0.5f ,2 ,bodyMovz-1),
+			center(bodyMovx, lookUp+0.5f , bodyMovz),
+			up(0, 1, 0);
 		camview.lookat(eye, center, up); // set our 4x4 "camera" matrix
 	}
 
@@ -414,7 +415,7 @@ void AppWindow::glutDisplay()
    
    GsMat bodyTrans, bodyRot;
 
-   bodyRot.roty(Bodyturn);
+   bodyRot.roty(Ttheta);
    bodyTrans.translation(bodyMovx, bodyMovy, bodyMovz);//back
 
    body.draw(stransf*bodyTrans*bodyRot, sproj, _light);
@@ -525,110 +526,8 @@ void AppWindow::glutDisplay()
    crate.draw(stransf*Scale*translations, sproj, _light);
 
    //////////////////////////////////////////////////////////////////////
+   zombieList[0]->drawZombie(stransf, sproj, _light);
 
-   GsMat rotB( //rotations of the body, unused
-	   cos(BT), 0.0f, -sin(BT), 0.0f,
-	   0.0f, 1.0f, 0.0f, 0.0f,
-	   sin(BT), 0.0f, cos(BT), 0.0f,
-	   0.0f, 0.0f, 0.0f, 1.0f
-   );
-   GsMat rotH( //rotations of the head
-	   cos(HT), 0.0f, -sin(HT), 0.0f,
-	   0.0f, 1.0f, 0.0f, 0.0f,
-	   sin(HT), 0.0f, cos(HT), 0.0f,
-	   0.0f, 0.0f, 0.0f, 1.0f
-   );
-   GsMat rotRA( //rotations of the right arm
-	   1.0f, 0.0f, 0.0f, 0.0f,
-	   0.0f, cos(RAT), -sin(RAT), 0.0f,
-	   0.0f, sin(RAT), cos(RAT), 0.0f,
-	   0.0f, 0.0f, 0.0f, 1.0f
-   );
-   GsMat rotLA( //rotations of the left arm
-	   1.0f, 0.0f, 0.0f, 0.0f,
-	   0.0f, cos(LAT), -sin(LAT), 0.0f,
-	   0.0f, sin(LAT), cos(LAT), 0.0f,
-	   0.0f, 0.0f, 0.0f, 1.0f
-   );
-   GsMat rotLL( //rotations of the left leg
-	   1.0f, 0.0f, 0.0f, 0.0f,
-	   0.0f, cos(LLT), -sin(LLT), 0.0f,
-	   0.0f, sin(LLT), cos(LLT), 0.0f,
-	   0.0f, 0.0f, 0.0f, 1.0f
-   );
-   GsMat rotRL( //rotations of the right leg
-	   1.0f, 0.0f, 0.0f, 0.0f,
-	   0.0f, cos(RLT), -sin(RLT), 0.0f,
-	   0.0f, sin(RLT), cos(RLT), 0.0f,
-	   0.0f, 0.0f, 0.0f, 1.0f
-   );
-   GsMat moveArmOrigin(
-	   1.0f, 0.0f, 0.0f, 0.0f,
-	   0.0f, 1.0f, 0.0f, -3 * scale,
-	   0.0f, 0.0f, 1.0f, 0.0f,
-	   0.0f, 0.0f, 0.0f, 1.0f
-   );
-   GsMat moveArmBack;
-   moveArmBack.translation(0, 0.35f, 0);
-
-   GsMat move(
-	   1.0f, 0.0f, 0.0f, moveX,
-	   0.0f, 1.0f, 0.0f, (3 * scale - 1),
-	   0.0f, 0.0f, 1.0f, moveZ,
-	   0.0f, 0.0f, 0.0f, 1.0f
-   );
-   GsMat test = moveArmOrigin * rotRA;
-
-   if (_viewaxis) _axis.draw(stransf, sproj);
-
-   GsMat scale1;
-   scale1.scale(.0000000003f);
-
-   GsMat reflect(
-	   -1.0f, 0.0f, 0.0f, 0.0f,
-	   0.0f, -1.0f, 0.0f, 0.0f,
-	   0.0f, 0.0f, 1.0f, 0.0f,
-	   0.0f, 0.0f, 0.0f, 1.0f
-   );
-
-   translations.translation(0,0.4f,0);
-
-   //main body
-   humanBody.draw(stransf * translations * scale1 * move * reflect, sproj, _light);
-   head.draw(stransf * translations * scale1* move * rotH* reflect, sproj, _light);
-
-   //RtArm.draw(stransf * scale1* move * moveArmBack * rotRA* reflect, sproj, _light); //old
-  // LfArm.draw(stransf * scale1* move * moveArmBack * rotLA* reflect, sproj, _light); //old
-
-   LfArm.draw(stransf * translations * moveArmBack * scale1* move * moveArmBack * rotLA* reflect, sproj, _light);
-   RtArm.draw(stransf * translations * moveArmBack * scale1* move * rotRA * reflect, sproj, _light);
-   RtLeg.draw(stransf * translations * scale1* move * rotRL* reflect, sproj, _light);
-   LfLeg.draw(stransf * translations * scale1* move * rotLL* reflect, sproj, _light);
-
-   /*
-   //shadow
-   float groundx = 0.0f;
-   float groundy = 1.0f;
-   float groundz = 0.0f;
-   float groundw = 1.0f;
-  // float dot = (lightx * groundx) + (lighty * groundy) + (lightz * groundz) + (lightw * groundw);
-
-   GsMat shadow(
-	   dot - lightx*groundx, 0.0f - lightx*groundy, 0.0f - lightx*groundz, 0.0f - lightx*groundw,
-	   0.0f - lighty*groundx, dot - lighty*groundy, 0.0f - lighty*groundz, 0.0f - lighty*groundw,
-	   0.0f - lightz*groundx, 0.0f - lightz*groundy, dot - lightz*groundz, 0.0f - lightz*groundw,
-	   0.0f - lightw*groundx, 0.0f - lightw*groundy, 0.0f - lightw*groundz, dot - lightw*groundw
-   );
-
-   glMultMatrixf((const GLfloat*)shadow);
-   shadow = stransf*shadow;
-   humanBody.draw(shadow  * move, sproj, _light);
-   head.draw(shadow  * move * rotH, sproj, _light);
-   RtArm.draw(shadow  * move * moveArmBack * rotRA, sproj, _light);
-   LfArm.draw(shadow  * move * moveArmBack * rotLA, sproj, _light);
-   RtLeg.draw(shadow  * move * rotRL, sproj, _light);
-   LfLeg.draw(shadow  * move * rotLL, sproj, _light);
-   */
 
    // Swap buffers and draw:
    glFlush();         // flush the pipeline (usually not necessary)

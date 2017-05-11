@@ -21,18 +21,8 @@ class AppWindow : public GlutWindow
  { private :
   
 	 ///////////////////////////////////////////
-	 SoSuperquadric humanBody;
-	 SoSuperquadric head;
-	 SoSuperquadric RtArm;
-	 SoSuperquadric LfArm;
-	 SoSuperquadric RtLeg;
-	 SoSuperquadric LfLeg;
 
-	 float moveX, moveZ;
-	 bool camChange;
-	 float BT, HT, RAT, LAT, RLT, LLT;//theta values for rotations
-	 float pi = 3.141592;
-	 float scale;
+	 std::vector<zombie*> zombieList;
 	 /////////////////////////////////////////////
 
     // My scene objects:
@@ -56,7 +46,7 @@ class AppWindow : public GlutWindow
 	std::vector<GLuint> ids;
     // App data:
     enum MenuEv { evOption0, evOption1 };
-    float _rotx, _roty, _fovy;
+    float _rotx, _roty, _fovy, Ttheta, lookUp;
     int _w, _h, direction;
 
    public :
@@ -75,6 +65,8 @@ class AppWindow : public GlutWindow
     virtual void glutMotion ( int x, int y );
     virtual void glutDisplay ();
     virtual void glutReshape ( int w, int h );
+	//dgistandoo
+	virtual void glutPassiveMouse(int x, int y);
  };
 
 #endif // APP_WINDOW_H

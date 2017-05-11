@@ -32,6 +32,7 @@ class GlutWindow
     static void glutKeyboardCB ( unsigned char key, int x, int y );
     static void glutSpecialCB ( int key, int x, int y );
     static void glutReshapeCB ( int w, int h );
+	static void glutPassiveMouseCB(int x, int y);
 
    public:
     // constructor
@@ -55,6 +56,7 @@ class GlutWindow
     virtual void glutMotion ( int x, int y ) {}
     virtual void glutReshape ( int w, int h ) {}
     virtual void glutDisplay () {}
+	virtual void glutPassiveMouse(int x, int y) {}
  };
 
 #endif // GLUT_WINDOW_H

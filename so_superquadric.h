@@ -67,7 +67,8 @@ public:
   std::vector<GsMat> locations;
 
   float AT = 0.5f;
-  GsMat ArmOuts( //rotations of the right arm
+  GsMat ArmOuts = 
+	  GsMat( //rotations of the right arm
     1.0f, 0.0f, 0.0f, 0.0f,
     0.0f, cos(AT), -sin(AT), 0.0f,
     0.0f, sin(AT), cos(AT), 0.0f,
@@ -86,24 +87,24 @@ public:
     //two spawn locations
     int ran = rand()%2;
     if(ran == 0) {
-      currentLocation =
+      currentLocation = GsMat
       (
-   	   1.0f, 0.0f, 0.0f, 5.0f,
+   	   1.0f, 0.0f, 0.0f, 0.0f,
    	   0.0f, 1.0f, 0.0f, 0.0f,
-   	   0.0f, 0.0f, 1.0f, 5.0f,
+   	   0.0f, 0.0f, 1.0f, 0.0f,
    	   0.0f, 0.0f, 0.0f, 1.0f
       );
     } else {
-      currentLocation =
+      currentLocation = GsMat
       (
-   	   1.0f, 0.0f, 0.0f, -5.0f,
+   	   1.0f, 0.0f, 0.0f, 0.0f,
    	   0.0f, 1.0f, 0.0f, 0.0f,
-   	   0.0f, 0.0f, 1.0f, -5.0f,
+   	   0.0f, 0.0f, 1.0f, 0.0f,
    	   0.0f, 0.0f, 0.0f, 1.0f
       );
     }
 
-    float scale = 0.01;
+	float scale = 0.05f;
 
     body.build(2* scale, 1* scale, 3* scale);
     head.build(2* scale, 2* scale, 2* scale);
